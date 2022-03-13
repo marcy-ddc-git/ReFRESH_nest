@@ -2,7 +2,6 @@
 SDEV-435-81
 
 Database refresh steps for databases in an Availability Group (AG):
-
 	1.  Remove database from AG on primary 
 	2.  Restore database on primary
 	3.  Make sure restored database is in Full recovery mode on primary
