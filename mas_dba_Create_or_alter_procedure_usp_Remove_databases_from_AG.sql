@@ -1,5 +1,5 @@
 /* 
-Script:         Create_or_alter_procedure_usp_Remove_databases_from_AG.sql
+Script:         mas_dba_Create_or_alter_procedure_usp_Remove_databases_from_AG.sql
 Author:         Marcy Ashley-Selleck
 Revision Date:  03/12/2022
 
