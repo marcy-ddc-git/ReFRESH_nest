@@ -5,7 +5,7 @@ The goal of my project is to add automation to several of the database refresh s
 
 By automating several of these steps, a Database Administrator (DBA) can perform a faster, more accurate data refresh of a QA environment from Production data.  Using the AG and automation to perform the steps saves the DBA from having to manually perform the steps for every database.
 
-Database refresh steps for databases in an Availability Group (AG):
+These are my database refresh steps for databases in an Availability Group (AG):
 
 	1.  Remove database from AG on primary 
 	2.  Restore database on primary
