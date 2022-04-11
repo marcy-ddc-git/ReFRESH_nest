@@ -1,7 +1,7 @@
 <# 
 Script:         mas_dba_PowerShell_Get-EventLog_and_write_to_SQL_event_log_table.ps1
 Author:         Marcy Ashley-Selleck
-Revision Date:  04/03/2022
+Revision Date:  04/10/2022
 
 This script will perform the following:
     Retrieve specific events from the Windows application event log and write them to a SQL table in the DAXAGReFRESH database.
@@ -18,8 +18,6 @@ $dt = new-object "System.Data.DataTable"
 
 <#  Retrieve specific events from the Windows application event log 
 #>
-#Get-EventLog -LogName Application -Source "*MSSQLSERVER*" -After "03-25-2022"
-
 foreach ($server_name in Get-Content "C:\Users\ddcmarcys\tempservers.txt") 
     { 
 
@@ -27,13 +25,13 @@ foreach ($server_name in Get-Content "C:\Users\ddcmarcys\tempservers.txt")
 #>
     Clear-Host
     $server_name
-    $dt = Get-Eventlog -computername $server_name -logname application -Source "*MSSQLSERVER*" -After "04-01-2022" 
+    $dt = Get-Eventlog -computername $server_name -logname application -Source "*MSSQLSERVER*" -After "04-10-2022" 
     }
 
 <#  Use the cmdlet Write-SqlTableData to write the data to the DAXAGReFRESH.dbo.tb_AG_event_log table
 #>
     $dt | select @{Expression={$($server_name) }; Label = "ComputerName"},Index,TimeGenerated,Source,InstanceID,Message |
-        Write-SqlTableData -ServerInstance "N15W02ERPDZZ001" -DatabaseName "DAXAGReFRESH" -SchemaName "dbo" -TableName "tb_AG_event_log" -Force 
+        Write-SqlTableData -ServerInstance "N15W02ERPDZZ001" -DatabaseName "DAXAGReFRESH" -SchemaName "dbo" -TableName "tb_AG_event_log"
 
     
 
