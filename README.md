@@ -3,7 +3,7 @@ SDEV-435-81  Marcy Ashley-Selleck
 
 Revision date:	4-10-2022
 
-The goal of my project is to add automation to several of the data refresh steps for databases in a SQL Server AlwaysOn Availability Group (AG). An AG is a data replication technology implementation for High Availability and Disaster Recovery for SQL Server databases that groups databases together for easier management of data replication and database failover scenarios.  
+The goal of my project is to add automation to several of the data refresh steps for databases in a SQL Server AlwaysOn Availability Group (AG). An AG is a data replication technology implementation for High Availability and Disaster Recovery for SQL Server that groups databases together for easier management of data replication and database failover scenarios.  
 
 By automating some of the steps, a Database Administrator (DBA) can perform a faster, more accurate data refresh of a QA environment from Production data.  Using the AG and automation to perform the steps saves the DBA from having to manually perform them individually for every database.
 
