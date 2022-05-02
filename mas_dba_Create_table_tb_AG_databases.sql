@@ -24,11 +24,3 @@ ALTER TABLE [dbo].[tb_AG_databases]  WITH CHECK ADD  CONSTRAINT [FK_tb_AG_databa
 REFERENCES [dbo].tb_AG_refresh_group ([refresh_group_ID])
 GO
 
-
-SET IDENTITY_INSERT [dbo].[tb_AG_databases] ON 
-INSERT [dbo].[tb_AG_databases] ([database_id], [refresh_group_ID], [database_name], [database_state_desc]) VALUES (13, 1, N'DDC_AX_QA_STO', N'ONLINE')
-INSERT [dbo].[tb_AG_databases] ([database_id], [refresh_group_ID], [database_name], [database_state_desc]) VALUES (14, 1, N'DDC_AX_QA_Baseline', N'ONLINE')
-INSERT [dbo].[tb_AG_databases] ([database_id], [refresh_group_ID], [database_name], [database_state_desc]) VALUES (15, 1, N'DDC_AX_QA_model', N'ONLINE')
-INSERT [dbo].[tb_AG_databases] ([database_id], [refresh_group_ID], [database_name], [database_state_desc]) VALUES (16, 1, N'DDC_AX_QA', N'ONLINE')
-INSERT [dbo].[tb_AG_databases] ([database_id], [refresh_group_ID], [database_name], [database_state_desc]) VALUES (22, 1, N'ePay_epay-qa.man.co', N'ONLINE')
-SET IDENTITY_INSERT [dbo].[tb_AG_databases] OFF

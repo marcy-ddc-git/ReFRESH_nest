@@ -1,7 +1,7 @@
 /* 
 Script:         mas_dba_Create_or_alter_procedure_usp_Add_databases_to_AG.sql
 Author:         Marcy Ashley-Selleck
-Revision Date:  03/12/2022
+Revision Date:  04/30/2022
 
 This script will perform the following:
 	Create stored procedure dbo.usp_Add_databases_to_AG
@@ -9,11 +9,11 @@ This script will perform the following:
 	Validate the AG exists on the replica server
     Retrieve the list of databases in DAXAGReFRESH.dbo.tb_AG_databases table 
 	Validate the database exists and is accessible
-	Add the database from the AG if no errors during processing commands
+	Add the database to the AG if no errors during processing commands
 	Catch error messages and show in output to screen and write to an error log table.
 */
 
-USE master
+USE [master]
 GO
 
 SET ANSI_NULLS ON
@@ -22,7 +22,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE OR ALTER PROCEDURE [dbo].[usp_Add_databases_to_AG]
+
+CREATE OR ALTER   PROCEDURE [dbo].[usp_Add_databases_to_AG]
 
 AS
 BEGIN
@@ -36,7 +37,7 @@ DECLARE @errorStatus        NVARCHAR(128)
 
 /*  Set @runAGrefresh bit flag to run the database add to AG step: 0 = test mode, 1 = run mode
 */
-SET @runAGrefresh = 0  ;  -- 0 = test mode, 1 = run mode
+SET @runAGrefresh = 1  ;  -- 0 = test mode, 1 = run mode
 
 
 /*  Get AG name from table tb_AG_refresh_group and validate AG is accessible
@@ -142,12 +143,15 @@ IF @refreshAGname = @valid_AG
   CLOSE cursorAGdatabases
   DEALLOCATE cursorAGdatabases
 
-
+/* Get replica status after script execution
+*/
+exec DAXAGReFRESH.dbo.usp_Capture_replica_status ;
 
 
   END
 ;
 
   END
-  GO
+GO
+
 

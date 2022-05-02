@@ -25,7 +25,7 @@ foreach ($server_name in Get-Content "C:\Users\ddcmarcys\tempservers.txt")
 #>
     Clear-Host
     $server_name
-    $dt = Get-Eventlog -computername $server_name -logname application -Source "*MSSQLSERVER*" -After "04-10-2022" 
+    $dt = Get-Eventlog -computername $server_name -logname application -Source "*MSSQLSERVER*" -After "04-30-2022" 
     }
 
 <#  Use the cmdlet Write-SqlTableData to write the data to the DAXAGReFRESH.dbo.tb_AG_event_log table

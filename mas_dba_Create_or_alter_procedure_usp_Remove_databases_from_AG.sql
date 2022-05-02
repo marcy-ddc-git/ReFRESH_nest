@@ -1,10 +1,10 @@
 /* 
-Script:         mas_dba_Create_or_alter_procedure_usp_Remove_databases_from_AG.sql
+Script:         mas_dba_Create_or_alter_procedure_usp_Add_databases_to_AG.sql
 Author:         Marcy Ashley-Selleck
-Revision Date:  03/12/2022
+Revision Date:  04/30/2022
 
 This script will perform the following:
-	Create stored procedure dbo.usp_Remove_databases_from_AG
+	Create stored procedure dbo.usp_Remove_databases_to_AG
     Retrieve the name of the Availability Group (AG) from DAXAGReFRESH.dbo.tb_AG_refresh_group table
 	Validate the AG exists on the replica server
     Retrieve the list of databases in DAXAGReFRESH.dbo.tb_AG_databases table 
@@ -13,16 +13,18 @@ This script will perform the following:
 	Catch error messages and show in output to screen and write to an error log table.
 */
 
-USE master
+USE [master]
 GO
 
+/****** Object:  StoredProcedure [dbo].[usp_Remove_databases_from_AG]    Script Date: 4/30/2022 1:58:20 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE OR ALTER PROCEDURE [dbo].[usp_Remove_databases_from_AG]
+
+CREATE OR ALTER   PROCEDURE [dbo].[usp_Remove_databases_from_AG]
 
 AS
 BEGIN
@@ -36,7 +38,7 @@ DECLARE @errorStatus        NVARCHAR(128)
 
 /*  Set @runAGrefresh bit flag to run the database removal from AG step: 0 = test mode, 1 = run mode
 */
-SET @runAGrefresh = 0  ;  -- 0 = test mode, 1 = run mode
+SET @runAGrefresh = 1  ;  -- 0 = test mode, 1 = run mode
 
 
 /*  Get AG name from table tb_AG_refresh_group and validate AG is accessible
@@ -142,12 +144,15 @@ IF @refreshAGname = @valid_AG
   CLOSE cursorAGdatabases
   DEALLOCATE cursorAGdatabases
 
-
+/* Get replica status after script execution
+*/
+exec DAXAGReFRESH.dbo.usp_Capture_replica_status ;
 
 
   END
 ;
 
   END
-  GO
+GO
+
 
